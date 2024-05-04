@@ -1,0 +1,1 @@
+This file is needed so Github add "photos" folder to repository. After installation you can delete it.

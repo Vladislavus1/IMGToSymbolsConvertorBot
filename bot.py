@@ -41,7 +41,7 @@ async def start_command(message: types.Message):
 async def help_command(message: types.Message):
     inline_keyboard = InlineKeyboardMarkup(inline_keyboard=[
         [
-            InlineKeyboardButton(text="Github", url="https://github.com/Vladislavus1/Task_Master_Bot")
+            InlineKeyboardButton(text="Github", url="https://github.com/Vladislavus1/IMGToSymbolsConvertorBot")
         ],
         [
             InlineKeyboardButton(text="Official aiogram page", url="https://aiogram.dev")
