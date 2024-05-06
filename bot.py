@@ -6,10 +6,11 @@ import db
 import convertor
 import random
 import string
+import os
 
 logging.basicConfig(level=logging.INFO)
 
-API_TOKEN = 'your_token'
+API_TOKEN = '6922679268:AAGPfPBqXwczm_m722NIsQAetPS8JUKwHJM'
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
 
@@ -54,13 +55,11 @@ async def help_command(message: types.Message):
 async def covert_photo(message: types.Message):
     photo_name = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(15)) + ".jpg"
     await message.photo[-1].download(f"photos/{photo_name}")
-    binary_lists = convertor.convert(photo_name)
-    with open("image.txt", "w", encoding="utf-8") as file:
-        for binary_line in binary_lists:
-            file.write(''.join(["█" if 0 <= pixel < 62 else "▓" if 62 < pixel < 124 else "▒" if 124 < pixel < 186 else "░" if 186 < pixel < 255 else " " if pixel==255 else " " for pixel in binary_line])+"\n")
-    file.close()
-    file = types.InputFile("image.txt")
+    text_name = convertor.convert(photo_name)
+    os.remove(f"photos/{photo_name}")
+    file = types.InputFile(text_name)
     await message.reply_document(file, caption=f'<i>Photo is successfully converted and ready to utilize!</i>', parse_mode=ParseMode.HTML)
+    os.remove(text_name)
 
 if __name__ == '__main__':
     db.run_db()
